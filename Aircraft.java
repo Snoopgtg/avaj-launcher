@@ -22,20 +22,19 @@ public class Aircraft{
 			{
 				String data = inputStream.nextLine();
 				System.out.println(data);
-				//regexChecker("?<=\\s|^)\\d+(?=\\s|$", data);
+				regexChecker("?<=\\s|^)\\d+(?=\\s|$", data);
 
 			}
 			inputStream.close();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
+	}
 
-				//reader.close();
 	protected	long 		id;
 	protected	String		name;
 	protected	Coordinates coordinates;
 	private		long		idCouter;
-
 	protected	Aircraft(String name, Coordinates coordinates){
 
 		this.name = name;
@@ -46,18 +45,15 @@ public class Aircraft{
 		i = 0;
 	}
 
-
-	}
-}
-	/*public static void regexChecker(String theRegex, String str2Check){
+	public static void regexChecker(String theRegex, String str2Check){
 
 		Pattern checkRegex = Pattern.compile(theRegex);
 		Matcher regexMatcher = checkRegex.matcher(str2Check);
 
 		while (regexMatcher.find()){
-			if (regexMatcher.group().length != 0){
+			if (regexMatcher.group().length() != 0){
 				System.out.println("TYT");
 			}
 		}
 	}	
-	*/
+}	
