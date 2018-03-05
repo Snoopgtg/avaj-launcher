@@ -21,8 +21,14 @@ public class Aircraft{
 			while (inputStream.hasNext())
 			{
 				String data = inputStream.nextLine();
-				System.out.println(data);
-				regexChecker("?<=\\s|^)\\d+(?=\\s|$", data);
+				/*String res;
+				System.out.println(data);*/
+				//regexChecker("^\\d+$", data);
+				//typeAircraftInspector(data);
+				positiveIntInspector(data);
+				/*res = data;
+				assertTrue(res.matcher("^\\d+$"));
+					System.out.println("No matcher : " + res);*/
 
 			}
 			inputStream.close();
@@ -44,9 +50,34 @@ public class Aircraft{
 		int i;
 		i = 0;
 	}
+	public static void positiveIntInspector(String text){
 
-	public static void regexChecker(String theRegex, String str2Check){
+		if (!text.matches("^[\\d]*$"))
+			{
+				System.err.println("error_2");
+				System.exit(1);
+			}
+		try {
+			Integer.parseInt(text);
+		} catch(NumberFormatException e) {
+			System.err.println("error_1");
+			System.exit(1);
+		}
+      System.out.println(text);
+	}
+/*
+	public static void typeAircraftInspector(String text){
 
+		if (!text.matches("\\b(Ballon|Aircraft)"))
+		{
+			System.err.println("errorInTypeOfCrafts");
+			System.exit(1);
+		}
+	}*/
+	/*public static void regexChecker(String theRegex, String str2Check){
+
+		System.out.println(theRegex);
+		System.out.println(str2Check);
 		Pattern checkRegex = Pattern.compile(theRegex);
 		Matcher regexMatcher = checkRegex.matcher(str2Check);
 
@@ -55,5 +86,5 @@ public class Aircraft{
 				System.out.println("TYT");
 			}
 		}
-	}	
+	}*/	
 }	
