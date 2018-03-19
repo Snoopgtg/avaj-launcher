@@ -16,7 +16,8 @@ public class Aircraft{
 		try{
 			File file = new File(args[0]);
 			//BufferedReader reader = new BufferedReader(file);
-
+			boolean k = true;
+			int t = 0;
 			Scanner inputStream = new Scanner(file);
 			while (inputStream.hasNext())
 			{
@@ -24,8 +25,27 @@ public class Aircraft{
 				/*String res;
 				System.out.println(data);*/
 				//regexChecker("^\\d+$", data);
-				//typeAircraftInspector(data);
-				positiveIntInspector(data);
+				if (k)
+					{
+						positiveIntInspector(data);
+						System.out.println("int_1 : " + data);
+
+						k = false;
+					}
+				else if (t + 1 % 5 == 1)
+				{
+					typeAircraftInspector(data);
+					System.out.println("type : " + data);
+					t += 1;	
+				}
+				else if (t + 1 % 5 != 1 || t + 1 % 5 != 2)
+				{
+					positiveIntInspector(data);
+					System.out.println("int_2 : " + data);
+					t = (t == 4) ? 0 : t + 1;
+				}
+				
+				//positiveIntInspector(data);
 				/*res = data;
 				assertTrue(res.matcher("^\\d+$"));
 					System.out.println("No matcher : " + res);*/
@@ -54,7 +74,7 @@ public class Aircraft{
 
 		if (!text.matches("^[\\d]*$"))
 			{
-				System.err.println("error_2");
+				System.err.println("Cheking digit");
 				System.exit(1);
 			}
 		try {
@@ -63,17 +83,17 @@ public class Aircraft{
 			System.err.println("error_1");
 			System.exit(1);
 		}
-      System.out.println(text);
+      //System.out.println(text);
 	}
-/*
+
 	public static void typeAircraftInspector(String text){
 
-		if (!text.matches("\\b(Ballon|Aircraft)"))
+		if (!text.matches("\\b(Baloon|JetPlane|Helicopter)"))
 		{
-			System.err.println("errorInTypeOfCrafts");
+			System.err.println("errorInTypeOfCrafts : " + text);
 			System.exit(1);
 		}
-	}*/
+	}
 	/*public static void regexChecker(String theRegex, String str2Check){
 
 		System.out.println(theRegex);
