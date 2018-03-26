@@ -26,30 +26,36 @@ public class Aircraft{
 				System.out.println(data);*/
 				//regexChecker("^\\d+$", data);
 				if (k)
-					{
+				{
 						positiveIntInspector(data);
 						System.out.println("int_1 : " + data);
 
 						k = false;
-					}
-				else if (t + 1 % 5 == 1)
-				{
-					typeAircraftInspector(data);
-					System.out.println("type : " + data);
-					t += 1;	
 				}
-				else if (t + 1 % 5 != 1 || t + 1 % 5 != 2)
+				else
 				{
-					positiveIntInspector(data);
-					System.out.println("int_2 : " + data);
-					t = (t == 4) ? 0 : t + 1;
-				}
-				
-				//positiveIntInspector(data);
-				/*res = data;
-				assertTrue(res.matcher("^\\d+$"));
-					System.out.println("No matcher : " + res);*/
-
+					for(String res : data.split(" "))
+					{
+						//System.out.println("type : " + data);
+						if (t == 0)
+						{
+							System.out.println("type : " + res);
+							typeAircraftInspector(res);
+							t += 1;
+						}
+						else if (t == 1)
+						{
+							System.out.println("name : " + res);
+							t += 1;
+						}
+						else
+						{
+							System.out.println("int_2 : " + res);
+							positiveIntInspector(res);
+							t = (t == 4) ? 0 : t + 1;
+						}
+					}	
+				}				
 			}
 			inputStream.close();
 		}catch (IOException e){
