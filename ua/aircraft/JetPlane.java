@@ -13,16 +13,17 @@ public class JetPlane extends Aircraft implements Flyable{
 
 		super(name, coordinates);
 	}
-
+@Override
 	public 	void updateConditions(){
 
 		int longitude = this.coordinates.getLongitude();
 		int latitude = this.coordinates.getLatitude();
 		int height = this.coordinates.getHeight();
-		switch (weatherTower.getWeather){
+		switch (weatherTower.getWeather(coordinates)){
 
-			case ("SUN") :
-				Coordinates coordinates = new Coordinates(longitude, latitude + 10, height + 2);//TODO зробити перевірку на крайні значення
+			case ("SUN") : System.out.println("SUN");
+				//Coordinates coordinates = new Coordinates(longitude, latitude + 10, height + 2);//TODO зробити перевірку на крайні значення
+			case ("RAIN") : System.out.println("RAIN");
 		}
 	/*	SUN - Latitude increases with 10, Height increases with 2
 ◦ RAIN - Latitude increases with 5
@@ -31,6 +32,7 @@ public class JetPlane extends Aircraft implements Flyable{
 	}
 	public	void registerTower(WeatherTower weatherTower){
 
+		System.out.println("registerTower");
 		this.weatherTower = weatherTower;
         this.weatherTower.register(this);
 	}

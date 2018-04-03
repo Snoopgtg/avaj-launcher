@@ -2,6 +2,7 @@ package ua.simulator;
 import ua.aircraft.AircraftFactory;
 import ua.weather.Tower;
 import ua.aircraft.Flyable;
+import ua.weather.WeatherTower;
 
 import java.io.BufferedReader;//Scaner
 import java.io.FileReader;
@@ -29,6 +30,7 @@ public class Simulator{
 				/*String res;
 				System.out.println(data);*/
 				//regexChecker("^\\d+$", data);
+				AircraftFactory aircraft = new AircraftFactory();
 				if (firstLine)
 				{
 						int amountSimulationRun = positiveIntInspector(data);
@@ -65,29 +67,12 @@ public class Simulator{
 							coordinatesFlyable[i - 2] = positiveIntInspector(res);
 						}
 					}
-
-
-					/*for(String res : data.split(" "))
-					{
-						/for (int t = 0; t < results.length; t++) {
-						System.out.println("-----------------"+results[t]);
-						if (t == 0)
-						{
-							System.out.println("type : " + res);
-							typeAircraftInspector(res);
-						}
-						else if (t == 1)
-						{
-							System.out.println("name : " + res);
-						}
-						else
-						{
-							System.out.println("int_2 : " + res);
-							positiveIntInspector(res);
-						}*/
-					AircraftFactory aircraft = new AircraftFactory();
+					System.out.println("before AircraftFactory");
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
-															coordinatesFlyable[1], coordinatesFlyable[2]);	
+															coordinatesFlyable[1], coordinatesFlyable[2]);
+					WeatherTower weatherTower = new WeatherTower();
+					flyable.registerTower(weatherTower);
+					//flyable.conditionsChanged();
 				}				
 			}
 			inputStream.close();
