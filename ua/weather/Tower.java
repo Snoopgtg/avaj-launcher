@@ -12,8 +12,6 @@ public class Tower{
 		if (observers.contains(flyable))
 			return;
 		observers.add(flyable);
-		System.out.println("Tower says: Baloon#B1(1) registered to weather tower.");
-
 	}
 	public void unregister(Flyable flyable){
 

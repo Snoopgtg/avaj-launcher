@@ -31,6 +31,7 @@ public class Simulator{
 				System.out.println(data);*/
 				//regexChecker("^\\d+$", data);
 				AircraftFactory aircraft = new AircraftFactory();
+				WeatherTower weatherTower = new WeatherTower();
 				if (firstLine)
 				{
 						int amountSimulationRun = positiveIntInspector(data);
@@ -69,8 +70,7 @@ public class Simulator{
 					}
 					System.out.println("before AircraftFactory");
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
-															coordinatesFlyable[1], coordinatesFlyable[2]);
-					WeatherTower weatherTower = new WeatherTower();
+										coordinatesFlyable[1], coordinatesFlyable[2]);
 					flyable.registerTower(weatherTower);
 					//flyable.conditionsChanged();
 				}				
