@@ -18,7 +18,10 @@ public class Helicopter extends Aircraft implements Flyable{
 
 	};
 
-	public	void registerTower(WeatherTower weatherTower) {
+	public	void registerTower(WeatherTower weatherTower){
 
-	};
+		this.weatherTower = weatherTower;
+        this.weatherTower.register(this);
+        System.out.println("Tower says: Helicopter#" + name + "(" + this.id + ") registered to weather tower.");
+	}
 }
