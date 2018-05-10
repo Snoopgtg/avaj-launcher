@@ -18,7 +18,6 @@ public class Tower{
 		if (observers.size() == 0)
 			return;
 		observers.remove(flyable);
-		System.out.println("Tower says: Baloon#B1(1) unregistered to weather tower.");
 	}
 	protected void conditionsChanged(){
 

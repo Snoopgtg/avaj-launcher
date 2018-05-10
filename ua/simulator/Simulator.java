@@ -1,8 +1,8 @@
 package ua.simulator;
 import ua.aircraft.AircraftFactory;
-import ua.weather.Tower;
+//import ua.simulator.Tower;
 import ua.aircraft.Flyable;
-import ua.weather.WeatherTower;
+import ua.simulator.WeatherTower;
 
 import java.io.BufferedReader;//Scaner
 import java.io.FileReader;
@@ -19,6 +19,9 @@ public class Simulator{
 			System.out.println("one and only one argument from the command line is available");
 			System.exit(1);
 		}
+		int weatherCounter = 0;
+		AircraftFactory aircraft = new AircraftFactory();
+		WeatherTower weatherTower = new WeatherTower();
 		try{
 			File file = new File(args[0]);
 			//BufferedReader reader = new BufferedReader(file);
@@ -30,11 +33,9 @@ public class Simulator{
 				/*String res;
 				System.out.println(data);*/
 				//regexChecker("^\\d+$", data);
-				AircraftFactory aircraft = new AircraftFactory();
-				WeatherTower weatherTower = new WeatherTower();
 				if (firstLine)
 				{
-						int amountSimulationRun = positiveIntInspector(data);
+						weatherCounter = positiveIntInspector(data);
 						System.out.println("int_1 : " + data);
 
 						firstLine = false;
@@ -68,16 +69,22 @@ public class Simulator{
 							coordinatesFlyable[i - 2] = positiveIntInspector(res);
 						}
 					}
-					System.out.println("before AircraftFactory");
+					//System.out.println("before AircraftFactory");
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
 										coordinatesFlyable[1], coordinatesFlyable[2]);
 					flyable.registerTower(weatherTower);
-					//flyable.conditionsChanged();
-				}				
+				}
 			}
 			inputStream.close();
 		}catch (IOException e){
 			e.printStackTrace();
+		}
+		System.out.println("before weatherCounter " + weatherCounter);
+		while (weatherCounter > 0)
+		{
+			System.out.println("changeWeather_" + weatherCounter);
+			weatherTower.changeWeather();
+			weatherCounter--;
 		}
 	}
 

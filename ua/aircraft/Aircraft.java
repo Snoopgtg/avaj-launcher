@@ -1,6 +1,6 @@
 package ua.aircraft;
 
-import ua.aircraft.Coordinates;
+import ua.weather.Coordinates;
 
 public class Aircraft{
 

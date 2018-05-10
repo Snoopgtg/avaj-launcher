@@ -4,20 +4,20 @@ import ua.weather.Coordinates;
 
 public class WeatherProvider{
 
-	private WeatherProvider weatherProvider = new WeatherProvider();
-	private	String[]		weather = {	"RAIN",
-										"FOG",
-										"SUN",
-										"SNOW"};										;
+	private static WeatherProvider weatherProvider = new WeatherProvider();
+	private	static String[]		weather = {	"RAIN",
+											"FOG",
+											"SUN",
+											"SNOW"};										;
 
 	private	WeatherProvider(){
 
 	}
-	public	WeatherProvider getProvider(){
+	public static WeatherProvider getProvider(){
 
-		return weatherProvider;
+		return WeatherProvider.weatherProvider;
 	}
-	public	String getCurrentWeather(Coordinates coordinates){
+	public String getCurrentWeather(Coordinates coordinates){
 
 		int res;
 		res = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();

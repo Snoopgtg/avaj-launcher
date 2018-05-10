@@ -1,6 +1,7 @@
 package ua.aircraft;
 
 import ua.aircraft.*;
+import ua.weather.Coordinates;
 
 //import ua.aircraft.AircraftFactory;
 
@@ -10,13 +11,13 @@ public class AircraftFactory{
 								int latitude, int height){
 		
 		Coordinates coordinates = new Coordinates(longitude, latitude, height);
-		
+
 		switch (type.toLowerCase()) {
 
 			case "jetplane" : return new JetPlane(name, coordinates);
 			case "helicopter" : return new Helicopter(name, coordinates);
 			case "baloon" : return new Baloon(name, coordinates);
-			default : return new JetPlane("ERROR", coordinates); //TODO правильно щось повурнути
+			default : return null;//TODO правильно щось повурнути
 		}
 
 		/*if (type.toLowerCase().equals("jetplane"))

@@ -1,6 +1,6 @@
 package ua.aircraft;
 
-import ua.weather.WeatherTower;
+import ua.simulator.WeatherTower;
 
 public interface Flyable{
 

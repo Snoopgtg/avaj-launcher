@@ -1,9 +1,9 @@
 package ua.aircraft;
 
-import ua.weather.WeatherTower;
+import ua.simulator.WeatherTower;
 import ua.aircraft.Aircraft;
 import ua.aircraft.Flyable;
-import ua.aircraft.Coordinates;
+import ua.weather.Coordinates;
 
 public class JetPlane extends Aircraft implements Flyable{
 
@@ -22,18 +22,30 @@ public class JetPlane extends Aircraft implements Flyable{
 		switch (weatherTower.getWeather(coordinates)){
 
 			case ("SUN") : System.out.println("SUN");
-				//Coordinates coordinates = new Coordinates(longitude, latitude + 10, height + 2);//TODO зробити перевірку на крайні значення
+				this.coordinates = new Coordinates(longitude, latitude + 10, height + 2);
 			case ("RAIN") : System.out.println("RAIN");
+				this.coordinates = new Coordinates(longitude, latitude + 5, height);
+			case ("FOG") : this.coordinates = new Coordinates(longitude, latitude + 1, height);
+			case ("SNOW") : this.coordinates = new Coordinates(longitude, latitude, height - 7);
 		}
-	/*	SUN - Latitude increases with 10, Height increases with 2
-◦ RAIN - Latitude increases with 5
-◦ FOG - Latitude increases with 1
-◦ SNOW - Height decreases with 7*/
+
+		if (this.coordinates.getHeight() > 100)
+			this.coordinates = new Coordinates(longitude, latitude, 100);
+		if (this.coordinates.getHeight() <= 0)
+		{
+			this.weatherTower.unregister(this);
+			System.out.println("Tower says: JetPlane#" + name +
+        				"(" + this.id + ") unregistered from weather tower.");
+		}
+
 	}
+
+@Override	
 	public	void registerTower(WeatherTower weatherTower){
 
 		this.weatherTower = weatherTower;
         this.weatherTower.register(this);
-        System.out.println("Tower says: JetPlane#" + name + "(" + this.id + ") registered to weather tower.");
+        System.out.println("Tower says: JetPlane#" + name +
+        				"(" + this.id + ") registered to weather tower.");
 	}
 }
