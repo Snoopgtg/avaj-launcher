@@ -10,9 +10,8 @@ public class WeatherTower extends Tower{
 
 		return WeatherProvider.getProvider().getCurrentWeather(coordinates);
 	}
-	public void changeWeather(){
-		//TODO потрібно прибрати public, але потім при компіляції видає помилку cannot be accessed from outside package weatherTower.changeWeather();
-
+	void changeWeather(){
+		
 		this.conditionsChanged();
 	}
 }

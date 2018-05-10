@@ -21,6 +21,7 @@ public class WeatherProvider{
 
 		int res;
 		res = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+		System.out.println(this.weather[(res + 1) % 4]);
 		return	this.weather[(res + 1) % 4];
 	}
 	

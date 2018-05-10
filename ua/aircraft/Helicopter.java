@@ -22,12 +22,22 @@ public class Helicopter extends Aircraft implements Flyable{
 		int height = this.coordinates.getHeight();
 		switch (weatherTower.getWeather(coordinates)){
 
-			case ("SUN") : System.out.println("SUN");
+			case ("SUN") : System.out.println("Helicopter#" + name +
+        				"(" + this.id + "): It's time for adveture.");
 				this.coordinates = new Coordinates(longitude + 10, latitude, height + 2);
-			case ("RAIN") : System.out.println("RAIN");
+				break;
+			case ("RAIN") : System.out.println("Helicopter#" + name +
+        				"(" + this.id + "): Where is my umbrella.");
 				this.coordinates = new Coordinates(longitude + 5, latitude, height);
-			case ("FOG") : this.coordinates = new Coordinates(longitude + 1, latitude, height);
-			case ("SNOW") : this.coordinates = new Coordinates(longitude, latitude, height - 12);
+				break;
+			case ("FOG") : System.out.println("Helicopter#" + name +
+        				"(" + this.id + "): Let us go in; fog is rising.");
+				this.coordinates = new Coordinates(longitude + 1, latitude, height);
+				break;
+			case ("SNOW") : System.out.println("Helicopter#" + name +
+        				"(" + this.id + "): Winter is coming.");
+				this.coordinates = new Coordinates(longitude, latitude, height - 12);
+				break;
 		}
 
 		if (this.coordinates.getHeight() > 100)
@@ -35,6 +45,8 @@ public class Helicopter extends Aircraft implements Flyable{
 		if (this.coordinates.getHeight() <= 0)
 		{
 			this.weatherTower.unregister(this);
+			System.out.println("Helicopter#" + name +
+        				"(" + this.id + ") I'm landing.");
 			System.out.println("Tower says: Helicopter#" + name +
         				"(" + this.id + ") unregistered from weather tower.");
 		}
