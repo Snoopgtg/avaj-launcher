@@ -19,7 +19,7 @@ public class JetPlane extends Aircraft implements Flyable{
 		int longitude = this.coordinates.getLongitude();
 		int latitude = this.coordinates.getLatitude();
 		int height = this.coordinates.getHeight();
-		switch (weatherTower.getWeather(coordinates)){
+		switch (weatherTower.getWeather(this.coordinates)){
 
 			case ("SUN") : System.out.println("JetPlane#" + name +
         				"(" + this.id + "): It's time to sunbathe.");
