@@ -20,6 +20,7 @@ public class Baloon extends Aircraft implements Flyable{
 		int longitude = this.coordinates.getLongitude();
 		int latitude = this.coordinates.getLatitude();
 		int height = this.coordinates.getHeight();
+
 		switch (weatherTower.getWeather(this.coordinates)){
 
 			case ("SUN") : System.out.println("Baloon#" + name +
@@ -28,11 +29,11 @@ public class Baloon extends Aircraft implements Flyable{
 				break;
 			case ("RAIN") : System.out.println("Baloon#" + name +
         				"(" + this.id + "): It's raining cats and dogs.");
-				this.coordinates = new Coordinates(longitude + 5, latitude, height - 5);
+				this.coordinates = new Coordinates(longitude, latitude, height - 5); // в тз: RAIN - Height decreases with 5
 				break;
 			case ("FOG") : System.out.println("Baloon#" + name +
         					"(" + this.id + "): keep calm and fog.");
-				this.coordinates = new Coordinates(longitude + 1, latitude, height -3);
+				this.coordinates = new Coordinates(longitude, latitude, height -3); // FOG - Height decreases with 3
 				break;
 			case ("SNOW") : System.out.println("Baloon#" + name +
         					"(" + this.id + "): freezing cold like a fridge.");
