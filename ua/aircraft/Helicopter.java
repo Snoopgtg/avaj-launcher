@@ -40,6 +40,7 @@ public class Helicopter extends Aircraft implements Flyable{
 				break;
 		}
 
+		// вот эта часть повторяется у всех Aircraft может стоит вынести?
 		if (this.coordinates.getHeight() > 100)
 			this.coordinates = new Coordinates(longitude, latitude, 100);
 		if (this.coordinates.getHeight() <= 0)
@@ -57,6 +58,7 @@ public class Helicopter extends Aircraft implements Flyable{
 
 		this.weatherTower = weatherTower;
         this.weatherTower.register(this);
+
         System.out.println("Tower says: Helicopter#" + name +
         				"(" + this.id + ") registered to weather tower.");
 	}
