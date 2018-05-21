@@ -19,4 +19,5 @@ public class Aircraft{
 
 		return idCounter++; //перевірити чи правильно присвоюється
 	}
+	
 }

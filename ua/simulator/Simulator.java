@@ -1,8 +1,8 @@
 package ua.simulator;
 import ua.aircraft.AircraftFactory;
-//import ua.simulator.Tower;
 import ua.aircraft.Flyable;
 import ua.simulator.WeatherTower;
+import ua.simulator.FileWriterForSimulator;
 
 import java.io.BufferedReader;//Scaner
 import java.io.FileReader;
@@ -16,10 +16,11 @@ public class Simulator{
 	public static void main(String[] args) throws Exception {
 		if (args.length != 1)
 		{
-			System.out.println("one and only one argument from the command line is available");
+			System.err.println("one and only one argument from the command line is available");
 			System.exit(1);
 		}
 		int weatherCounter = 0;
+		FileWriterForSimulator dataWriter = new FileWriterForSimulator();
 		AircraftFactory aircraft = new AircraftFactory();
 		WeatherTower weatherTower = new WeatherTower();
 		try{
@@ -30,9 +31,6 @@ public class Simulator{
 			while (inputStream.hasNext())
 			{
 				String data = inputStream.nextLine();
-				/*String res;
-				System.out.println(data);*/
-				//regexChecker("^\\d+$", data);
 				if (firstLine)
 				{
 						weatherCounter = positiveIntInspector(data);
@@ -48,14 +46,17 @@ public class Simulator{
 					String nameFlyable = new String();
 					int[] coordinatesFlyable = new int[3];
 
-					
+					if (results.length != 5)
+					{
+						System.err.println("the amount of data does not match 5");
+						System.exit(1);
+					}
 					for (int i = 0; i < results.length; i++) {
 						String res = results[i];
-						//System.out.println("-----------------"+results[i]);
 						if (i == 0)
 						{
-							System.out.println("type : " + res);
-							typeAircraftInspector(res);
+							/*System.out.println("type : " + res);
+							typeAircraftInspector(res);*/
 							typeFlyable = res;
 						}
 						else if (i == 1)
@@ -69,10 +70,11 @@ public class Simulator{
 							coordinatesFlyable[i - 2] = positiveIntInspector(res);
 						}
 					}
-					//System.out.println("before AircraftFactory");
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
 										coordinatesFlyable[1], coordinatesFlyable[2]);
 					flyable.registerTower(weatherTower);
+					flyable.registerWriter(dataWriter);
+
 				}
 			}
 			inputStream.close();
@@ -80,49 +82,37 @@ public class Simulator{
 			e.printStackTrace();
 		}
 		System.out.println("before weatherCounter " + weatherCounter);
+
 		while (weatherCounter > 0)
 		{
 			System.out.println("changeWeather_" + weatherCounter);
 			weatherTower.changeWeather();
 			weatherCounter--;
 		}
+
+		dataWriter.write();		
 	}
 
-	public static int positiveIntInspector(String text){
+	public static int positiveIntInspector(String text) {
 
-		if (!text.matches("^[\\d]*$"))
-			{
-				System.err.println("Cheking not digit");
-				System.exit(1);
-			}
+		if (!text.matches("^[\\d]*$")) {
+			System.err.println("Only positive number");
+			System.exit(1);
+		}
+
 		try {
 			return Integer.parseInt(text);
 		} catch(NumberFormatException e) {
-			System.err.println("error_1");
-			System.exit(1);
+			throw new NumberFormatException("it's not Integer");	
 		}
-		return 0;//TODO подумати що робити з цим
 	}
 
-	public static void typeAircraftInspector(String text){
+	/*public static void typeAircraftInspector(String text) {
 
 		if (!text.matches("\\b(Baloon|JetPlane|Helicopter)"))
 		{
 			System.err.println("errorInTypeOfCrafts : " + text);
 			System.exit(1);
 		}
-	}
-	/*public static void regexChecker(String theRegex, String str2Check){
-
-		System.out.println(theRegex);
-		System.out.println(str2Check);
-		Pattern checkRegex = Pattern.compile(theRegex);
-		Matcher regexMatcher = checkRegex.matcher(str2Check);
-
-		while (regexMatcher.find()){
-			if (regexMatcher.group().length() != 0){
-				System.out.println("TYT");
-			}
-		}
-	}*/	
+	}*/
 }	

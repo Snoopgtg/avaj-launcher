@@ -17,7 +17,7 @@ public class AircraftFactory{
 			case "jetplane" : return new JetPlane(name, coordinates);
 			case "helicopter" : return new Helicopter(name, coordinates);
 			case "baloon" : return new Baloon(name, coordinates);
-			default : return null;//TODO правильно щось повурнути
+			default : throw new Error(type + " is not valid aircraft");
 		}
 	}
 }
