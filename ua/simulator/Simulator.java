@@ -4,14 +4,13 @@ import ua.aircraft.Flyable;
 import ua.simulator.WeatherTower;
 import ua.simulator.FileWriterForSimulator;
 
-import java.io.BufferedReader;//Scaner
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.regex.*;
 import java.io.File;
 import java.util.Scanner;
 
-public class Simulator{
+public class Simulator {
 
 	public static void main(String[] args) throws Exception {
 		if (args.length != 1)
@@ -25,29 +24,23 @@ public class Simulator{
 		WeatherTower weatherTower = new WeatherTower();
 		try{
 			File file = new File(args[0]);
-			//BufferedReader reader = new BufferedReader(file);
 			boolean firstLine = true;
 			Scanner inputStream = new Scanner(file);
 			while (inputStream.hasNext())
 			{
 				String data = inputStream.nextLine();
-				if (firstLine)
-				{
-						weatherCounter = positiveIntInspector(data);
-						System.out.println("int_1 : " + data);
-
-						firstLine = false;
+				if (firstLine) {
+					weatherCounter = positiveIntInspector(data);
+					firstLine = false;
 				}
-				else
-				{
+				else {
 					String[] results = data.split(" ");
 
 					String typeFlyable = new String();
 					String nameFlyable = new String();
 					int[] coordinatesFlyable = new int[3];
 
-					if (results.length != 5)
-					{
+					if (results.length != 5) {
 						System.err.println("the amount of data does not match 5");
 						System.exit(1);
 					}
@@ -57,37 +50,28 @@ public class Simulator{
 						{
 							typeFlyable = res;
 						}
-						else if (i == 1)
-						{
-							System.out.println("name : " + res);
+						else if (i == 1) {
 							nameFlyable = res;
 						}
-						else
-						{
-							System.out.println("int_2 : " + res);
+						else {
 							coordinatesFlyable[i - 2] = positiveIntInspector(res);
 						}
 					}
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
-										coordinatesFlyable[1], coordinatesFlyable[2]);
+						coordinatesFlyable[1], coordinatesFlyable[2]);
 					flyable.registerWriter(dataWriter);
 					flyable.registerTower(weatherTower);
 
 				}
 			}
 			inputStream.close();
-		}catch (IOException e){
+		}catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("before weatherCounter " + weatherCounter);
-
-		while (weatherCounter > 0)
-		{
-			System.out.println("changeWeather_" + weatherCounter);
+		while (weatherCounter > 0) {
 			weatherTower.changeWeather();
 			weatherCounter--;
 		}
-
 		dataWriter.write();		
 	}
 

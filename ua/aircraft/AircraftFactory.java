@@ -3,12 +3,10 @@ package ua.aircraft;
 import ua.aircraft.*;
 import ua.weather.Coordinates;
 
-//import ua.aircraft.AircraftFactory;
-
-public class AircraftFactory{
+public class AircraftFactory {
 
 	public	Flyable newAircraft(String type, String name, int longitude,
-								int latitude, int height){
+		int latitude, int height) {
 		
 		Coordinates coordinates = new Coordinates(longitude, latitude, height);
 

@@ -2,26 +2,25 @@ package ua.weather;
 
 import ua.weather.Coordinates;
 
-public class WeatherProvider{
+public class WeatherProvider {
 
 	private static WeatherProvider weatherProvider = new WeatherProvider();
 	private	static String[]		weather = {	"RAIN",
 											"FOG",
 											"SUN",
-											"SNOW"};										;
+											"SNOW"};
 
-	private	WeatherProvider(){
+	private	WeatherProvider() {
 
 	}
-	public static WeatherProvider getProvider(){
+	public static WeatherProvider getProvider() {
 
 		return WeatherProvider.weatherProvider;
 	}
-	public String getCurrentWeather(Coordinates coordinates){
+	public String getCurrentWeather(Coordinates coordinates) {
 
 		int res;
 		res = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
-		System.out.println(this.weather[(res + 1) % 4]);
 		return	this.weather[(res + 1) % 4];
 	}
 	
