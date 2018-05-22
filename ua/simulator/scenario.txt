@@ -1,2 +1,4 @@
 2
+baloon B1 0 3 0 
+Baloon B2 1 8 66
 JetPlane J1 23 44 32

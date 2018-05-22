@@ -55,8 +55,6 @@ public class Simulator{
 						String res = results[i];
 						if (i == 0)
 						{
-							/*System.out.println("type : " + res);
-							typeAircraftInspector(res);*/
 							typeFlyable = res;
 						}
 						else if (i == 1)
@@ -72,8 +70,8 @@ public class Simulator{
 					}
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
 										coordinatesFlyable[1], coordinatesFlyable[2]);
-					flyable.registerTower(weatherTower);
 					flyable.registerWriter(dataWriter);
+					flyable.registerTower(weatherTower);
 
 				}
 			}
@@ -106,13 +104,4 @@ public class Simulator{
 			throw new NumberFormatException("it's not Integer");	
 		}
 	}
-
-	/*public static void typeAircraftInspector(String text) {
-
-		if (!text.matches("\\b(Baloon|JetPlane|Helicopter)"))
-		{
-			System.err.println("errorInTypeOfCrafts : " + text);
-			System.exit(1);
-		}
-	}*/
 }	

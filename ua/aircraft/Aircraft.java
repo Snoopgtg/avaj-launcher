@@ -9,15 +9,15 @@ public class Aircraft{
 	protected			Coordinates coordinates;
 	static private		long		idCounter;
 
-	protected Aircraft(String name, Coordinates coordinates){
+	protected Aircraft(String name, Coordinates coordinates) {
 
 		this.id = nextId();
 		this.name = name;
 		this.coordinates = coordinates;
 	}
-	private	long nextId(){
-
-		return idCounter++; //перевірити чи правильно присвоюється
-	}
 	
+	private	long nextId() {
+
+		return idCounter++;
+	}
 }
