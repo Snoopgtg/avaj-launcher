@@ -25,15 +25,17 @@ public class Simulator {
 		try{
 			File file = new File(args[0]);
 			boolean firstLine = true;
+			boolean dataIsPreset = false;
 			Scanner inputStream = new Scanner(file);
-			while (inputStream.hasNext())
-			{
+			while (inputStream.hasNext()) {
 				String data = inputStream.nextLine();
 				if (firstLine) {
 					weatherCounter = positiveIntInspector(data);
 					firstLine = false;
 				}
 				else {
+
+					dataIsPreset = true;
 					String[] results = data.split(" ");
 
 					String typeFlyable = new String();
@@ -42,8 +44,8 @@ public class Simulator {
 
 					if (results.length != 5) {
 						System.err.println("Each following line will be describes an aircraft"
-						+ "that will be part of the simulation, with this format: "
-						+ "TYPE NAME LONGITUDE LATITUDE HEIGHT.");
+							+ "that will be part of the simulation, with this format: "
+							+ "TYPE NAME LONGITUDE LATITUDE HEIGHT.");
 						System.exit(1);
 					}
 					for (int i = 0; i < results.length; i++) {
@@ -61,11 +63,16 @@ public class Simulator {
 					Flyable flyable = aircraft.newAircraft(typeFlyable, nameFlyable, coordinatesFlyable[0],
 						coordinatesFlyable[1], coordinatesFlyable[2]);
 					flyable.registerWriter(dataWriter);
-					flyable.registerTower(weatherTower);
-
+					flyable.registerTower(weatherTower);					
 				}
 			}
 			inputStream.close();
+			if (!dataIsPreset) {
+				System.err.println("Each following line will be describes an aircraft"
+							+ "that will be part of the simulation, with this format: "
+							+ "TYPE NAME LONGITUDE LATITUDE HEIGHT.");
+				System.exit(1);
+			}
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
