@@ -41,13 +41,14 @@ public class Simulator {
 					int[] coordinatesFlyable = new int[3];
 
 					if (results.length != 5) {
-						System.err.println("the amount of data does not match 5");
+						System.err.println("Each following line will be describes an aircraft"
+						+ "that will be part of the simulation, with this format: "
+						+ "TYPE NAME LONGITUDE LATITUDE HEIGHT.");
 						System.exit(1);
 					}
 					for (int i = 0; i < results.length; i++) {
 						String res = results[i];
-						if (i == 0)
-						{
+						if (i == 0) {
 							typeFlyable = res;
 						}
 						else if (i == 1) {
@@ -78,7 +79,7 @@ public class Simulator {
 	public static int positiveIntInspector(String text) {
 
 		if (!text.matches("^[\\d]*$")) {
-			System.err.println("Only positive number");
+			System.err.println("The first line of the file will be contains a positive integer number");
 			System.exit(1);
 		}
 
